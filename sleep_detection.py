@@ -49,6 +49,17 @@ min_distance_right = 99999
 image_width = 0
 image_height = 0
 
+from enum import Enum
+
+
+class DRIVER_STATE(Enum):
+    SLEEPING = "sleeping"
+    AWAKE = "awake"
+
+
+driver_state = DRIVER_STATE.AWAKE
+driver_state_count = 0
+
 
 def draw_landmarks_on_image(rgb_image, detection_result):
     if (
@@ -110,6 +121,8 @@ def calculate_distance(landmarks):
 
 
 def driver_sleeping(eye_landmarks, min_max_distances):
+    global driver_state, driver_state_count
+
     (
         max_distance_left,
         max_distance_right,
@@ -135,7 +148,29 @@ def driver_sleeping(eye_landmarks, min_max_distances):
     if right_distance < min_distance_right:
         min_distance_right = right_distance
 
-    return True if left_distance < 200 or right_distance < 200 else False, (
+    cur_state = True if left_distance < 190 or right_distance < 190 else False
+    if cur_state:
+        cur_state = DRIVER_STATE.SLEEPING
+    else:
+        cur_state = DRIVER_STATE.AWAKE
+
+    # if old state and new state is same then incerement the count
+    if cur_state == driver_state:
+        driver_state_count += 1
+    # if state is changed then reset the state count
+    else:
+        driver_state = cur_state
+        driver_state_count = 0
+
+    # if driver state is sleeping and state_count is bigger than 5(last 5 frame sleeping state)
+    if driver_state == DRIVER_STATE.SLEEPING and driver_state_count > 5:
+        return True, (
+            max_distance_left,
+            max_distance_right,
+            min_distance_left,
+            min_distance_right,
+        )
+    return False, (
         max_distance_left,
         max_distance_right,
         min_distance_left,

@@ -1,8 +1,12 @@
+import time
 import numpy as np
-
 import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
+import tempfile
+import cv2
+import os
+
 
 left_eye_landmarks = [
     33,
@@ -59,6 +63,18 @@ class DRIVER_STATE(Enum):
 
 driver_state = DRIVER_STATE.AWAKE
 driver_state_count = 0
+
+base_options = python.BaseOptions(model_asset_path="face_model.task")
+options = vision.FaceLandmarkerOptions(
+    base_options=base_options,
+    output_face_blendshapes=False,
+    output_facial_transformation_matrixes=False,
+    num_faces=1,
+)
+detector = vision.FaceLandmarker.create_from_options(options)
+cap = cv2.VideoCapture(-1)
+
+latest_file = ""
 
 
 def draw_landmarks_on_image(rgb_image, detection_result):
@@ -120,15 +136,15 @@ def calculate_distance(landmarks):
     return distancex, distancey, distancey + distancex
 
 
-def driver_sleeping(eye_landmarks, min_max_distances):
+def driver_sleeping(
+    eye_landmarks,
+):
     global driver_state, driver_state_count
+    global max_distance_left
+    global max_distance_right
+    global min_distance_left
+    global min_distance_right
 
-    (
-        max_distance_left,
-        max_distance_right,
-        min_distance_left,
-        min_distance_right,
-    ) = min_max_distances
     left_landmarks = [
         eye_landmarks[i] for i in range(len(eye_landmarks)) if i in left_eye_landmarks
     ]
@@ -164,59 +180,28 @@ def driver_sleeping(eye_landmarks, min_max_distances):
 
     # if driver state is sleeping and state_count is bigger than 5(last 5 frame sleeping state)
     if driver_state == DRIVER_STATE.SLEEPING and driver_state_count > 5:
-        return True, (
-            max_distance_left,
-            max_distance_right,
-            min_distance_left,
-            min_distance_right,
-        )
-    return False, (
-        max_distance_left,
-        max_distance_right,
-        min_distance_left,
-        min_distance_right,
-    )
+        return (True,)
+    return False
 
 
-import cv2
+def read_frame_and_annotatte():
+    global max_distance_left
+    global max_distance_right
+    global min_distance_left
+    global min_distance_right
+    global image_height, image_width
 
-base_options = python.BaseOptions(model_asset_path="face_model.task")
-options = vision.FaceLandmarkerOptions(
-    base_options=base_options,
-    output_face_blendshapes=False,
-    output_facial_transformation_matrixes=False,
-    num_faces=1,
-)
-detector = vision.FaceLandmarker.create_from_options(options)
-
-cap = cv2.VideoCapture(0)
-
-while True:
     ret, frame = cap.read()
     image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame)
+    image_height = image.height
+    image_width = image.width
 
     detection_result = detector.detect(image)
 
     annotated_image = draw_landmarks_on_image(image.numpy_view(), detection_result)
-    image_width = image.numpy_view().shape[1]
-    image_height = image.numpy_view().shape[0]
+    is_sleeping = driver_sleeping(detection_result.face_landmarks[0])
+    print(max_distance_left, max_distance_right, min_distance_left, min_distance_right)
 
-    is_sleeping, min_max_distances = driver_sleeping(
-        detection_result.face_landmarks[0],
-        (
-            max_distance_left,
-            max_distance_right,
-            min_distance_left,
-            min_distance_right,
-        ),
-    )
-    (
-        max_distance_left,
-        max_distance_right,
-        min_distance_left,
-        min_distance_right,
-    ) = min_max_distances
-    print(min_max_distances)
     cv2.putText(
         annotated_image,
         "SLEEPING" if is_sleeping else "AWAKE",
@@ -225,10 +210,18 @@ while True:
         fontScale=2,
         color=(0, 0, 255),
     )
-    if annotated_image is not None:
-        cv2.imshow("face", annotated_image)
-        if cv2.waitKey(1) & 0xFF == ord("q"):
-            break
 
-cap.release()
-cv2.destroyAllWindows()
+    # save image to a file
+
+    temp_file_path = tempfile.mkstemp(suffix=".png", dir="static")
+    cv2.imwrite(temp_file_path[1], annotated_image)
+    global latest_file
+    if os.path.exists(latest_file):
+        os.remove(latest_file)
+    latest_file = temp_file_path[1]
+
+    return temp_file_path[1].split("/")[-1], is_sleeping
+    # is_sleeping
+    # if annotated_image is not None:
+    #     cv2.imshow("face", annotated_image)
+    #     cv2.waitKey(0)

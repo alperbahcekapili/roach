@@ -11,17 +11,23 @@
   <h1>Your App</h1>
   <button onclick="startImageProcessor()">Start Image Processing</button>
 
-  <!-- Optional: Display area for the processed image -->
   <div>
     <img  id="imageDisplay" src="">
   </div>
 
   <div id="chat-history" style="display: flex; flex-direction: column;">
+    
+    <div id="user-message">
 
+    </div>
+    <div id="roach-message">
+
+    </div>
   </div>
   <button onclick="tts()">Text to Speech</button>
   <button onclick="stt()">Speech to Text </button>
   
+
   <script src="client.js"></script>
 </body>
 </html>

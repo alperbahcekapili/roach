@@ -4,17 +4,12 @@ function startImageProcessor() {
     const openaiWorkeer = new Worker('opeaniWorker.js');
 
     setInterval(() => {
-        console.log("iamge worker triggered")
         imageWorker.postMessage('process');
       }, 50);
 
-    console.log("Here")
     setInterval(() => {
-        console.log("opeani worker triggered")
         openaiWorkeer.postMessage('New message');
     }, 800);
-
-
 
     imageWorker.onmessage = function (e) {
     // Update the DOM with the processed image path

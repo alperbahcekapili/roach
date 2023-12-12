@@ -162,3 +162,5 @@ cython_debug/
 
 dlib-19.9/
 face_model.task
+
+backend/static/

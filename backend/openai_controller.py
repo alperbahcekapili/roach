@@ -23,3 +23,10 @@ class OPENAIController:
         history.append({"role": "user", "content": new_message})
         ai_answer = self.generateSuggestions(history)
         return ai_answer
+
+    def STT(self, save_location):
+        audio_file = open(save_location, "rb")
+        transcript = self.client.audio.transcriptions.create(
+            model="whisper-1", file=audio_file
+        )
+        return transcript.text

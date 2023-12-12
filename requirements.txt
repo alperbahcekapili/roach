@@ -4,3 +4,6 @@ scipy
 mediapipe
 streamlit
 openai
+pyaudio
+gTTS
+playsound

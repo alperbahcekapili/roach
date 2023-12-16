@@ -17,9 +17,7 @@ class OPENAIController:
 
         return response.choices[0].message.content
 
-    def assistant_chat(self, history, new_message):
-        history = ast.literal_eval(history)
-        history.append({"role": "user", "content": new_message})
+    def assistant_chat(self, history):
         ai_answer = self.generateSuggestions(history)
         return ai_answer
 

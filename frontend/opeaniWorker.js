@@ -30,36 +30,25 @@ self.onmessage = async function (e) {
     }
   }  
   async function chat(input){
+    // input {history, new_message}
     try {
       if(input)
-      {const gpt_res = await fetch('http://localhost:5000/chat',
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({"history":"[{'role':'system','content':'You are a car assistant. The driver is about to sleep. Wake him/her up and try to hold a conversation'},{'role':'user','content':'I am feeling sleepy. Start a conversation.'}]","new_message":input}), 
-              });
-      gpt_res.json().then((async obj=>{
-        const [path, duration] = await tts(obj);
-        
-        self.postMessage({"path":path,"message":obj.response,"duration":duration})
-      }))}
-      else{
+      {
+        console.log(JSON.stringify(input))
+        const temp_history = input['history']
         const gpt_res = await fetch('http://localhost:5000/chat',
               {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({"history":"[{'role':'system','content':'You are a car assistant. The driver is about to sleep. Wake him/her up and try to hold a conversation'}]","new_message":"I am feeling sleepy. Start a conversation."}), 
+                body: JSON.stringify({"history":temp_history}) 
               });
-      gpt_res.json().then((async obj=>{
-        const [path, duration] = await tts(obj);
-        
-        self.postMessage({"path":path,"message":obj.response,"duration":duration})
-      }))
-      }
+        gpt_res.json().then((async obj=>{
+          const [path, duration] = await tts(obj);
+          // ai's response
+          self.postMessage({"path":path,"message":obj.response,"duration":duration})
+        }))}
       
     } catch (error) {
       console.error('Error chat:', error);
@@ -67,9 +56,7 @@ self.onmessage = async function (e) {
     
   }
 
-if(e.data == 'Wake Up') 
-  chat();  
-else
-  chat(e.data)
+
+chat(e.data)
   
 };

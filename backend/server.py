@@ -15,15 +15,16 @@ openai_controller = OPENAIController()
 @app.route("/process_image", methods=["GET"])
 def process_image():
     processed_image_path, is_sleeping = read_frame_and_annotatte()
-    return jsonify({"processed_image_path": processed_image_path,"is_sleeping":is_sleeping})
+    return jsonify(
+        {"processed_image_path": processed_image_path, "is_sleeping": is_sleeping}
+    )
 
 
 @app.route("/chat", methods=["POST"])
 def chat():
+    print(request.json)
     history = request.json["history"]
-    #print(history)
-    new_message = request.json["new_message"]
-    resp = openai_controller.assistant_chat(history, new_message)
+    resp = openai_controller.assistant_chat(history)
     return jsonify({"response": resp})
 
 
@@ -38,9 +39,9 @@ def record():
 @app.route("/tts", methods=["POST"])
 def tts_endpoint():
     message = request.json["response"]
-    sound_file_path , duration = tts(message)
-    return jsonify({"sound_file_path": sound_file_path,"duration":duration})
+    sound_file_path, duration = tts(message)
+    return jsonify({"sound_file_path": sound_file_path, "duration": duration})
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

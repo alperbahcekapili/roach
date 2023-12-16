@@ -10,10 +10,7 @@
 </head>
 <body>
   <h1>Roach</h1>
-  <button onclick="startImageProcessor()">Start Image Processing</button>
-  <button onclick="tts()">Text to Speech</button>
-  <button onclick="stt()">Speech to Text </button>
-  
+  <button onclick="startImageProcessor()">Start Roach</button>
 
   <div class="application-container">
     <div class="left-part-container">
@@ -21,42 +18,15 @@
     </div>
   
     <div class="right-part-container">
-      
+      <h2>Chat History</h2>
       <div id="chat-history" class="chat-history" >
-      
-        <div class="user-message-container  message-container"  id="latest-message">
-          <p class="user-message beat">
-            I feel sleepy
-          </p>
-          <img class="icon" src="assets/user.png">
-        </div>
-        <div class = "roach-message-container message-container" id="roach-message">
-          <img class= "icon" src = "assets/robot.png">
-          <p class ="roach-message" >
-            Dear driver, please try to focus on the road. 
-          </p>
-        </div>
-
-        <div class="user-message-container  message-container"  id="user-message">
-          <p class="user-message beat">
-            I feel sleepy
-          </p>
-          <img class="icon" src="assets/user.png">
-        </div>
-        <div class = "roach-message-container message-container" id="roach-message">
-          <img class= "icon" src = "assets/robot.png">
-          <p class ="roach-message" >
-            Dear driver, please try to focus on the road. 
-          </p>
-        </div>
-
-
       </div>
-  
-
     </div>
 
-  </div>  </div>
+  </div>  
+</div>
+
+
   
   <script src="client.js"></script>
 </body>

@@ -1,7 +1,7 @@
 from time import sleep
 import openai
 import os
-
+import ast
 
 class OPENAIController:
     def __init__(self) -> None:
@@ -11,15 +11,13 @@ class OPENAIController:
 
     def generateSuggestions(self, history):
         response = self.client.chat.completions.create(
-            model="gpt-3.5-turbo", messages=history
+            model="gpt-3.5-turbo", messages=list(history)
         )
 
         return response.choices[0].message.content
 
     def assistant_chat(self, history, new_message):
-        print("In openai controller")
-        print(history)
-        sleep(10)
+        history = ast.literal_eval(history)
         history.append({"role": "user", "content": new_message})
         ai_answer = self.generateSuggestions(history)
         return ai_answer

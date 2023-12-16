@@ -1,0 +1,101 @@
+.application-container{
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: center;
+  padding: 50px;
+}
+.right-part-container{
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  min-width: 700px;
+}
+
+.left-part-container{
+  margin: 50px;
+}
+
+.camera{
+  height: 500px;
+
+}
+.user-message-container{
+  align-items: center;
+  align-content: center;
+  width: inherit;
+  
+  border-style: solid;
+  text-align: right;
+  display: flex;
+
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.user-message{
+  font: 500px;
+  margin-left: auto;
+  padding-right: 10px;
+  
+}
+
+.roach-message-container{
+  align-items: center;
+  align-content: center;
+  width: inherit;
+  border-width: 5px;
+
+  border-width: 2px;
+  border-style: solid;
+  border-style: double;
+  text-align: left;
+  margin-bottom: 20px;
+  display: flex;
+  border-radius: 5px;
+}
+
+.roach-message{
+  font: 500;
+  padding-left: 10px;
+}
+
+.message-container{
+  background-color: #A0E9FF;
+  border-width: 2px;
+  border : #7f7fba
+}
+.icon{
+  width: 40px;
+  height: 40px;
+}
+
+.beat {
+	animation: beat 0.5s infinite alternate;
+	transform-origin: center;
+}
+
+/* Heart beat animation */
+@keyframes beat{
+	to { transform: scale(1.1); }
+}
+
+.chat-history{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+body{
+  background: rgb(127,127,186);
+  background: radial-gradient(circle, rgba(127,127,186,1) 0%, rgba(0,212,255,1) 100%); 
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+  padding: 30px;
+  
+}

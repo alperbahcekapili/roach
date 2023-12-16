@@ -5,29 +5,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Plain JavaScript App</title>
 </head>
 <body>
-  <h1>Your App</h1>
+  <h1>Roach</h1>
   <button onclick="startImageProcessor()">Start Image Processing</button>
-
-  <div>
-    <img  id="imageDisplay" src="">
-  </div>
-
-  <div id="chat-history" style="display: flex; flex-direction: column;">
-    
-    <div id="user-message">
-
-    </div>
-    <div id="roach-message">
-
-    </div>
-  </div>
   <button onclick="tts()">Text to Speech</button>
   <button onclick="stt()">Speech to Text </button>
   
 
+  <div class="application-container">
+    <div class="left-part-container">
+      <img class="camera" id="imageDisplay" src="http://localhost:5000/static/tmppdk63vun.png">
+    </div>
+  
+    <div class="right-part-container">
+      
+      <div id="chat-history" class="chat-history" >
+      
+        <div class="user-message-container  message-container"  id="latest-message">
+          <p class="user-message beat">
+            I feel sleepy
+          </p>
+          <img class="icon" src="assets/user.png">
+        </div>
+        <div class = "roach-message-container message-container" id="roach-message">
+          <img class= "icon" src = "assets/robot.png">
+          <p class ="roach-message" >
+            Dear driver, please try to focus on the road. 
+          </p>
+        </div>
+
+        <div class="user-message-container  message-container"  id="user-message">
+          <p class="user-message beat">
+            I feel sleepy
+          </p>
+          <img class="icon" src="assets/user.png">
+        </div>
+        <div class = "roach-message-container message-container" id="roach-message">
+          <img class= "icon" src = "assets/robot.png">
+          <p class ="roach-message" >
+            Dear driver, please try to focus on the road. 
+          </p>
+        </div>
+
+
+      </div>
+  
+
+    </div>
+
+  </div>  </div>
+  
   <script src="client.js"></script>
 </body>
 </html>

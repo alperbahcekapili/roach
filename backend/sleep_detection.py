@@ -72,7 +72,7 @@ options = vision.FaceLandmarkerOptions(
     num_faces=1,
 )
 detector = vision.FaceLandmarker.create_from_options(options)
-cap = cv2.VideoCapture(-1)
+cap = cv2.VideoCapture(0)
 
 latest_file = ""
 

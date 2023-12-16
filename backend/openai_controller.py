@@ -20,7 +20,7 @@ class OPENAIController:
         print("In openai controller")
         print(history)
         sleep(10)
-        history.append({"role": "user", "content": new_message})
+
         ai_answer = self.generateSuggestions(history)
         return ai_answer
 

@@ -15,7 +15,7 @@
     ]
   },
   {
-    "name": "airconditioner",
+    "name": "air_conditioner",
     "possible_phrases": [
       "Turn on the AC in the car.",
       "Start the air conditioning in the vehicle.",

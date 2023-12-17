@@ -6,7 +6,7 @@ from openai_controller import OPENAIController
 from Models.function_matching import FunctionMatcher
 from sound import tts, stt, record_voice
 import time
-from models import car
+from Models.car import CAR
 
 
 __import__("pysqlite3")
@@ -19,9 +19,8 @@ app = Flask(__name__)
 CORS(app)
 
 openai_controller = OPENAIController()
-car_controller = car.CAR()
+car_controller = CAR()
 function_matcher = FunctionMatcher()
-print(function_matcher.get_similar("Exit"))
 
 
 @app.route("/process_image", methods=["GET"])
@@ -45,7 +44,18 @@ def record():
     recorded_voice_file = record_voice()
     time.sleep(6)
     response = stt(openai_controller, recorded_voice_file)
-    return jsonify({"response": response})
+    similar_func = function_matcher.get_similar(response)
+    if similar_func is not None and similar_func != "exit":
+        f = getattr(car_controller, similar_func)
+        f()
+
+    return jsonify(
+        {
+            "response": response,
+            "similar_func": similar_func,
+            "terminate": similar_func == "exit",
+        }
+    )
 
 
 @app.route("/tts", methods=["POST"])
@@ -55,19 +65,10 @@ def tts_endpoint():
     return jsonify({"sound_file_path": sound_file_path, "duration": duration})
 
 
-@app.route("/car_state", methods=["POST"])
+@app.route("/car_state", methods=["GET"])
 def get_car_states():
     states = car_controller.all_states()
     return states
-
-
-@app.route("/car_control", methods=["POST"])
-def control():
-    if request.json["function"] == "play_music":
-        car_controller.play_music()
-    elif request.json["function"] == "air_conditioner":
-        car_controller.air_conditioner()
-    return "Success"
 
 
 if __name__ == "__main__":

@@ -40,7 +40,7 @@ function startImageProcessor() {
 
     setInterval(() => {
         imageWorker.postMessage('process');
-      }, 100);
+      }, 1000);
 
     
       
@@ -128,7 +128,18 @@ async function stt(i){
 
 
 function updateMetrics(metrics){
+  console.log(metrics)
   document.getElementById('temperature').innerHTML = metrics["temperature"]
   document.getElementById('speaker-level').innerHTML = metrics["speaker-level"]
   document.getElementById('speed').innerHTML = metrics["speed"]
 }
+
+setInterval(async ()=>{
+  const response = await fetch("http://localhost:5000/car_state")
+  response.json().then((array)=>{
+      var metric_dict = {"speaker-level":array[0].volume, "temperature":array[1].temp, "speed":80 + Math.floor(Math.random() * 10)}
+      updateMetrics(metric_dict)
+    
+  })
+  
+}, 1000)

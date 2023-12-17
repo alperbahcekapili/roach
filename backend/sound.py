@@ -70,4 +70,5 @@ def tts(text, lang="en"):
 
 
 def stt(openai_controller, save_location):
-    return openai_controller.STT(save_location)
+    user_prompt = openai_controller.STT(save_location)
+    return user_prompt

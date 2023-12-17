@@ -137,3 +137,22 @@ h2{
   border-left: black;
     border-left-style: solid;
 }
+
+.matched-function{
+  font-weight: bold;
+  border: blue;
+    border-top-width: medium;
+    border-top-style: none;
+    border-right-width: medium;
+    border-right-style: none;
+    border-bottom-width: medium;
+    border-bottom-style: none;
+    border-left-width: medium;
+    border-left-style: none;
+  border-style: solid;
+  padding: 10px;
+  border-radius: 10px;
+  border-width: 2px;
+  background: blue;
+  color: white;
+}

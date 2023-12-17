@@ -21,9 +21,7 @@ class FunctionMatcher:
         self.embedding_function = SentenceTransformerEmbeddings(
             model_name="all-MiniLM-L6-v2"
         )
-        self.db = Chroma(
-            persist_directory="chroma_db", embedding_function=self.embedding_function
-        )
+        self.db = Chroma(embedding_function=self.embedding_function)
         self.db.add_documents(docs)
 
         print(f"Totally {self.db.get()} entries inserted in the chromadb")

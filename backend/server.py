@@ -3,13 +3,23 @@ from flask import Flask, request, jsonify
 from sleep_detection import read_frame_and_annotatte
 from flask_cors import CORS
 from openai_controller import OPENAIController
+from Models.function_matching import FunctionMatcher
 from sound import tts, stt, record_voice
 import time
+
+
+__import__("pysqlite3")
+import sys
+
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+
 
 app = Flask(__name__)
 CORS(app)
 
 openai_controller = OPENAIController()
+function_matcher = FunctionMatcher()
+print(function_matcher.get_similar("Exit"))
 
 
 @app.route("/process_image", methods=["GET"])

@@ -124,3 +124,11 @@ async function stt(i){
   }
 }
 
+
+
+
+function updateMetrics(metrics){
+  document.getElementById('temperature').innerHTML = metrics["temperature"]
+  document.getElementById('speaker-level').innerHTML = metrics["speaker-level"]
+  document.getElementById('speed').innerHTML = metrics["speed"]
+}

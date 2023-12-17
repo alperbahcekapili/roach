@@ -1,0 +1,49 @@
+[
+  {
+    "name": "play_music",
+    "possible_phrases": [
+      "Play some music.",
+      "Start playing a song.",
+      "Begin a music playlist.",
+      "Launch the music player.",
+      "Turn on the tunes.",
+      "Put on some music for me.",
+      "Play a track.",
+      "Start a music session.",
+      "Activate the music player.",
+      "Begin the playlist."
+    ]
+  },
+  {
+    "name": "airconditioner",
+    "possible_phrases": [
+      "Turn on the AC in the car.",
+      "Start the air conditioning in the vehicle.",
+      "Activate the car's climate control.",
+      "Switch on the vehicle's air conditioner.",
+      "Engage the AC in the car.",
+      "Initiate the car's cooling system.",
+      "Enable the air conditioning in the vehicle.",
+      "Start the car's cooling.",
+      "Set the car's temperature to cool.",
+      "Power up the air conditioner in the car.",
+      "Can you open the airconditioner for me please ?",
+      "I need some cool air"
+    ]
+  },
+  {
+    "name": "exit",
+    "possible_phrases": [
+      "Exit the conversation.",
+      "End the dialog.",
+      "Terminate the interaction.",
+      "Close the chat session.",
+      "Finish our discussion.",
+      "Conclude the conversation.",
+      "Exit the chat.",
+      "Wrap up our talk.",
+      "Stop the dialogue.",
+      "End our conversation here."
+    ]
+  }
+]

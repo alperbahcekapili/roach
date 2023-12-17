@@ -8,3 +8,6 @@ pyaudio
 gTTS
 playsound
 librosa
+chromadb
+langchain
+sentence-transformers

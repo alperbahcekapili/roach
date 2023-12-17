@@ -11,7 +11,41 @@
 <body>
   <h1>Roach</h1>
   <button onclick="startImageProcessor()">Start Roach</button>
+  <div class="metrics-container">
+    <div class="vertical-line">
 
+    </div>
+    <div class="metric">
+      <div class="metric-name">
+        Temperature
+      </div>
+      <div class="metric-value" id="temperature">
+        20C
+      </div>
+    </div>
+
+    <div class="metric">
+      <div class="metric-name">
+        Speaker Level
+      </div>
+      <div class="metric-value" id = "speaker-level">
+        20C
+      </div>
+    </div>
+
+
+    <div class="metric">
+      <div class="metric-name">
+        Speed
+      </div>
+      <div class="metric-value" id="speed">
+        20C
+      </div>
+    </div>
+
+
+
+  </div>
   <div class="application-container">
     <div class="left-part-container">
       <img class="camera" id="imageDisplay" src="http://localhost:5000/static/tmppdk63vun.png">

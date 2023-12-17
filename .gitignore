@@ -164,3 +164,4 @@ dlib-19.9/
 face_model.task
 
 backend/static/
+backend/chroma_db/

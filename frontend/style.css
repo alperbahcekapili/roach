@@ -7,6 +7,7 @@
 }
 .right-part-container{
   margin: 50px;
+  margin-top: 0px;
   display: flex;
   flex-direction: column;
   max-height: 500px;
@@ -102,4 +103,37 @@ h1{
 
 h2{
   text-align: center;
+}
+
+.metric-name{
+  font-size: x-large;
+  font-weight: bold;
+  text-align: center;
+}
+.metric-value{
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  
+}
+
+.metric{
+  width: 250px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-right: black;
+    border-right-style: none;
+
+  border-right-style: solid;
+}
+
+.metrics-container{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+.vertical-line{
+  border-left: black;
+    border-left-style: solid;
 }

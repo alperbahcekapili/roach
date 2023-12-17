@@ -1,11 +1,3 @@
-# roach
-
-Smart and noble assistant for next generation cars. 
-
-
-
-
-
 
 # Roach: Smart Car Assistant
 

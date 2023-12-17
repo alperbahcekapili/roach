@@ -19,7 +19,8 @@ app = Flask(__name__)
 CORS(app)
 
 openai_controller = OPENAIController()
-car_controller = car.CAR()function_matcher = FunctionMatcher()
+car_controller = car.CAR()
+function_matcher = FunctionMatcher()
 print(function_matcher.get_similar("Exit"))
 
 
@@ -53,10 +54,12 @@ def tts_endpoint():
     sound_file_path, duration = tts(message)
     return jsonify({"sound_file_path": sound_file_path, "duration": duration})
 
+
 @app.route("/car_state", methods=["POST"])
 def get_car_states():
     states = car_controller.all_states()
     return states
+
 
 @app.route("/car_control", methods=["POST"])
 def control():

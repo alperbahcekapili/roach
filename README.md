@@ -4,7 +4,7 @@
 Roach is a smart car assistant designed to enhance the driving experience by detecting driver fatigue and engaging in natural conversations. It features advanced capabilities such as function matching for commands like opening music or adjusting the AC.
 
 [Slides](https://docs.google.com/presentation/d/1Bvz7Jjc12NPEY--Cc_XfTcGq5MlKbuA5ew94Y3gOsl8/edit?usp=sharing)
-
+[Demo Video](https://www.youtube.com/watch?v=8EFbl8HcYrE)
 ## Features
 
 - **Driver Monitoring**: Roach uses advanced algorithms to monitor the driver's state and detects if the driver is snoozing or fatigued.
